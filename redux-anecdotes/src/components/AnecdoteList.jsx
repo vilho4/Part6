@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
+import PropTypes from 'prop-types'
 
 const Anecdote = ({ anecdote, handleClick }) => {
     return (
@@ -11,21 +12,26 @@ const Anecdote = ({ anecdote, handleClick }) => {
         </div>
       </div>
     )
-  }
+}
+
+Anecdote.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  anecdote: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired
+}
 
 const AnecdoteList = () => {
     const dispatch = useDispatch()  
     const anecdotes = useSelector(state => 
         [...state].sort((a, b) => b.votes - a.votes)
     )
-    console.log('vittujeejee', anecdotes)
-
-    // const handleVote = (id) => {
-    //     dispatch({ type: 'VOTE', id })
-    //   }
 
       return (
         <div>
+          <h2>Anecdotes</h2>
           {anecdotes.map(anecdote => (
             <Anecdote
               key={anecdote.id}

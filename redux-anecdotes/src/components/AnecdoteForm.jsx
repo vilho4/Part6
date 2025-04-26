@@ -15,10 +15,13 @@ const AnecdoteForm = () => {
   }
 
   return (
+    <div>
+    <h2>Create new</h2>
     <form onSubmit={addAnecdote}>
-      <input name = 'anecdote'/>
+      <input name="anecdote" />
       <button>create</button>
     </form>
+  </div>
   )
 }
 
