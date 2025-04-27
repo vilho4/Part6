@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
-import { filterChange } from '../reducers/filterReducer'
+import { setFilter } from '../reducers/filterReducer'
 
 const Filter = () => {
     const dispatch = useDispatch()
     const handleChange = (event) => {
         event.preventDefault()
         const searchTerm = event.target.value
-        dispatch(filterChange(searchTerm))
+        dispatch(setFilter(searchTerm))
     }
 
     const style = {
