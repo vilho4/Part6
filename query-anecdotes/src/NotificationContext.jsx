@@ -16,7 +16,7 @@ const NotificationContext = createContext()
 export const NotificationContextProvider = (props) => {
   const [notification, notificationDispatch] = useReducer(notificationReducer,'')
 
-  console.log(notification)
+  // console.log(notification)
 
   useEffect(() => {
     if (notification) {

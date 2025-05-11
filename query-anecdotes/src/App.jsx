@@ -1,22 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useReducer } from 'react'
-// import axios from 'axios'
-// import { getAnecdotes, createAnecdote } from './requests'
 import { getAnecdotes, updateAnecdote } from './requests'
 import Notification from './components/Notification'
 import { useContext } from 'react'
 import NotificationContext from './NotificationContext'
-
 import AnecdoteForm from './components/AnecdoteForm'
-// import Notification from './components/Notification'
 
 const App = () => {
   const [notification, notificationDispatch] = useContext(NotificationContext)
   const queryClient = useQueryClient()
 
-  const updateAnecdoteMutation = useMutation( //highligh-line
+  const updateAnecdoteMutation = useMutation(
     {mutationFn: updateAnecdote,    
-      onSuccess: () => { // highligh-line
+      onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })    
     },
   })
@@ -38,13 +33,11 @@ const App = () => {
       queryFn: getAnecdotes,
       retry: 3
   })
-  console.log(JSON.parse(JSON.stringify(result)))
+  // console.log(JSON.parse(JSON.stringify(result)))
 
   if ( result.isLoading ) {
     return <div>anecdote service not availabe due to problems</div>
   }
-
-  // const anecdotes=result.data
 
   const anecdotes = [...result.data].sort((a, b) => b.votes - a.votes)
 
